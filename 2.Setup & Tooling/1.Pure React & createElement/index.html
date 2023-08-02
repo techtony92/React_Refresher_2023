@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="style.css" />
+		<title>Pure React & createElement</title>
+	</head>
+	<body>
+		<div id="root">not rendered</div>
+		<script src="https://unpkg.com/react@18.2.0/umd/react.development.js"></script>
+		<script src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
+		<script>
+			const App = () => {
+				/**
+				 * @Function React.createElement
+				 *
+				 * * React createElement can take text or components. Since we give it text
+				 * * it is looking to render an HTML tag (h1,p,a, etc). We can place any text there, but if it
+				 * * is not a valid html tag, then it will not be recognized by the browser as a valid html Tag.
+				 *
+				 * * If we give React.createElement a component(denoted with a identifier that is a function with a Capital letter)
+				 * * react will render that component as a react element.
+				 *
+				 * * React.createElement Takes 3 parameters:
+				 * @param TagNAME : string | ReactComponent `Mandatory`
+				 * @param HTMLElementAttributes { attributeName:string IE: id:root} `Optional`
+				 * @param Children : string | ReactComponent `Optional`
+				 *
+				 *
+				 */
+
+				return React.createElement(
+					"div",
+					{},
+					React.createElement("h1", {}, "Adopt Me!")
+				);
+			};
+			// Your code is going to go here
+
+			/**
+			 * * ReactDom.createRoot(rootElement)
+			 * * Create root is the newest way to append react elements to the dom. Before
+			 * * react 18, the way to do this was `ReactDom.Render(rootElement, <App />)`,
+			 * * but in react 18 , we got a feature called `concurrency` which used be called `concurrent mode`.
+			 * * This is a way to opt-in to new features of react. React.createRoot basically tells react itself
+			 * * 'this project is using the new features of react'.
+			 *
+			 * * ReactDom.Render() basically puts the project into legacy mode.
+			 * * You can also use your root identifier to call render() to have react re-render.(This is very special edge case though)
+			 */
+
+			const container = document.getElementById("root");
+			const root = ReactDOM.createRoot(container);
+			root.render(React.createElement(App));
+		</script>
+	</body>
+</html>
